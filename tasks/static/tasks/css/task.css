@@ -1,0 +1,114 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  color: blueviolet;
+  font-size: 2rem;
+}
+
+.add_task form input {
+  font-size: 1rem;
+  padding: 0.4rem 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.add_task form button {
+  font-size: 1rem;
+  padding: 7.5px 5px;
+  color: white;
+  background-color: blueviolet;
+  border: none;
+  border-radius: 3px;
+}
+
+.add_task {
+  width: 30%;
+}
+
+.add_task form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tasks {
+  width: 30%;
+  margin-top: 2rem;
+  border-radius: 3px;
+}
+
+.tasks .tasks_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border: 1px solid rgb(169, 166, 166);
+  border-radius: 3px;
+  margin-top: 1rem;
+  background-color: rgba(137, 43, 226, 0.2);
+}
+
+.tasks form {
+  margin-left: 0.5rem;
+}
+
+.tasks div p {
+  font-size: 1rem;
+  color: rgb(40, 39, 39);
+}
+
+.delete button {
+  font-size: 1.2rem;
+  color: rgb(0, 0, 0);
+  border: none;
+  margin-right: 0.5rem;
+  text-decoration: none;
+  background-color: transparent;
+
+}
+
+.task_control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 30%;
+  font-size: 17px;
+  margin-top: 1rem;
+}
+
+.task_control span {
+  color: blueviolet;
+}
+
+.filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+}
+
+.filter a {
+  text-decoration: none;
+  color: rgb(40, 40, 40);
+}
+
+.task_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:transparent;
+  width: 100%;
+  border:none;
+}
+.task_container form{
+  padding-top:1rem;
+  padding-bottom:1rem;
+}
+.task_container form input {
+  padding: 0.3rem 0.2rem;
+  background-color: transparent;
+}

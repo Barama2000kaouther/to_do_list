@@ -1,0 +1,73 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'tasks/css/task.css' %}">
+  <title>to do app</title>
+
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>To Do List</h1>
+
+    <section class="add_task">
+      <form method="POST" action="{% url 'tasks:addtask' %}">
+        {% csrf_token %}
+        {{form.task}}
+        <button type="submit"> add new task</button>
+      </form>
+    </section>
+
+    <section class="tasks">
+      <!--<div>
+        <form action="">
+          {% csrf_token %}
+          <input type="checkbox" >
+        </form>
+        <p>name of the task</p>
+        <a href=""><span>&times;</span></a>
+      </div>
+      <div>
+        <form action="" method="POST">
+        {% csrf_token %}
+        <input type="checkbox">
+        </form>
+        <p>name of the task</p>
+        <a href=""><span>&times;</span></a>
+      </div>-->
+      {% for task in all_tasks%}
+      <div class="tasks_container">
+        <form action="{%url 'tasks:complete' task.id%}" method="POST">
+          {% csrf_token %}
+          <input type="checkbox" name="complete" onchange="this.form.submit()" {% if task.is_completed %}checked
+            {%endif%}>
+        </form>
+        <div class="task_container" data-id="{{ task.id }}" data-url="{% url 'tasks:update' task.id %}">
+          <p>{{task.task}}</p>
+          <input type="hidden" id="csrf" value="{{ csrf_token }}">
+        </div>
+        <form action="{% url 'tasks:delete' task.id %}" method="post" class="delete">
+          {% csrf_token%}
+          <button type="submit">&times;</button>
+        </form>
+      </div>
+      {%endfor%}
+    </section>
+    <section class="task_control">
+      <p> <span>{{count_tasks}}</span> finished task</p>
+      <div class="filter">
+        <a href="{% url 'tasks:index1' 'all'%}">All</a>
+        <a href="{% url 'tasks:index1' 'completed' %}">Completed</a>
+        <a href="{% url 'tasks:index1'  'active'%}">Active</a>
+      </div>
+    </section>
+  </div>
+  <script src="{% static 'tasks/js/task.js' %}"></script>
+</body>
+
+</html>
