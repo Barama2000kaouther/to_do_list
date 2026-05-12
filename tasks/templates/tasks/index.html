@@ -24,22 +24,6 @@
     </section>
 
     <section class="tasks">
-      <!--<div>
-        <form action="">
-          {% csrf_token %}
-          <input type="checkbox" >
-        </form>
-        <p>name of the task</p>
-        <a href=""><span>&times;</span></a>
-      </div>
-      <div>
-        <form action="" method="POST">
-        {% csrf_token %}
-        <input type="checkbox">
-        </form>
-        <p>name of the task</p>
-        <a href=""><span>&times;</span></a>
-      </div>-->
       {% for task in all_tasks%}
       <div class="tasks_container">
         <form action="{%url 'tasks:complete' task.id%}" method="POST">
