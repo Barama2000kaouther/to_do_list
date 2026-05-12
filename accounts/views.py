@@ -1,11 +1,41 @@
-from django.shortcuts import render
-
+from django.shortcuts import render,redirect
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login,logout
 # Create your views here.
 def login_view(request):
-  pass
+  if request.method=="POST":
+    username=request.POST['username']   
+    password=request.POST['password']
+    user=authenticate(request,username=username,password=password)
+    if user is not None:
+       login(request,user)
+       return redirect('tasks:index')
+    else:
+      message='user not exist please try again'
+      return render(request,'accounts/login.html',{'message':message})
+  return render(request,'accounts/login.html')
+
 
 def logout_view(request):
-  pass
+  logout(request)
+  return redirect('accounts:login')
 
 def signup_view(request):
-  pass
+ 
+  if request.method=='POST':
+      username=request.POST['username']   
+      email=request.POST['email']
+      password=request.POST['password']
+      confirm_password=request.POST['confirm_password']
+      if password!=confirm_password:
+            message='non identical password enter your password again'
+            return render(request,'accounts/signup.html',{'message':message})
+      if User.objects.filter(username=username).exists():
+            message='the username is taken'
+            return render(request,'accounts/signup.html',{'message':message})
+      
+      user=User.objects.create_user(username=username,email=email,password=password)
+      user.save()
+      return redirect('accounts:login')
+  return render(request,'accounts/signup.html')
+      
