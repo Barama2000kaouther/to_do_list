@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import Task
 from .forms import TaskForm
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -13,12 +13,14 @@ def get_task_content(task):
       'all_tasks':task,
       'count_tasks':count_tasks
   } 
-
+  
+@login_required
 def index(request):
   tasks=Task.objects.all().values()
   context=get_task_content(tasks)
   return render(request,"tasks/index.html",context)
-  
+
+@login_required  
 def filter_task(request,filter_type):
 
   if filter_type=='all': 
@@ -36,7 +38,7 @@ def filter_task(request,filter_type):
   
   
  
-
+@login_required
 def add_task(request):
   if request.method=="POST":
     form=TaskForm(request.POST)
@@ -48,7 +50,7 @@ def add_task(request):
     
   return redirect('tasks:index')
   
-    
+@login_required    
 def delete_task(request,task_id):
   if request.method=='POST':
       deletedTask=get_object_or_404(Task,id=task_id)
@@ -57,6 +59,7 @@ def delete_task(request,task_id):
     
   return redirect('tasks:index')
 
+@login_required
 def complete_task(request,task_id):
   if request.method=='POST':
        task = get_object_or_404(Task,id=task_id)
@@ -65,7 +68,8 @@ def complete_task(request,task_id):
        return redirect('tasks:index')
    
   return redirect('tasks:index')
-        
+
+@login_required        
 def update_task(request,task_id):
      if request.method=='POST':
        task = get_object_or_404(Task,id=task_id)
