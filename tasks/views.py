@@ -1,7 +1,10 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import Task
 from .forms import TaskForm
+
 # Create your views here.
+
+
 def get_task_content(task):
   form=TaskForm()
   count_tasks=task.count()
