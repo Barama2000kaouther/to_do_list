@@ -33,7 +33,8 @@
           <input type="checkbox" name="complete" onchange="this.form.submit()" {% if task.is_completed %}checked
             {%endif%}>
         </form>
-        <div class="task_container" data-id="{{ task.id }}" data-url="{% url 'tasks:update' task.id %}">
+        <div class="task_container" data-id="{{ task.id }}"
+         data-url="{% url 'tasks:update' task.id %}">
           <p>{{task.task}}</p>
           <input type="hidden" id="csrf" value="{{ csrf_token }}">
         </div>
